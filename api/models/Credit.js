@@ -10,6 +10,7 @@ module.exports = {
       model: 'ClientUser',
       required: true
     },
+
     amount: {
       type: 'number',
       required: true
@@ -27,6 +28,11 @@ module.exports = {
 
     profit: {
       type: 'number',
+      required: true
+    },
+
+    transaction: {
+      model: 'Transaction',
       required: true
     },
 

@@ -172,7 +172,6 @@ module.exports.routes = {
   'POST /api/creditRequest': {
     controller: 'CreditRequestController',
     action: 'createCreditRequest',
-
   },
 
   'GET /api/creditRequest': {
@@ -185,7 +184,6 @@ module.exports.routes = {
     action: 'fetchCreditRequest',
 
   },
-
 
   'GET /api/creditRequest/requestInterest': {
     controller: 'CreditRequestController',
@@ -244,6 +242,18 @@ module.exports.routes = {
     controller: 'TransactionController',
     action: 'createTransaction',
   },
+
+  'POST /api/transaction/grantrequest/creditRequestId': {
+    controller: 'TransactionController',
+    action: 'grantCreditRequest',
+  },
+
+
+  'POST /api/transaction/payDebt/creditId': {
+    controller: 'TransactionController',
+    action: 'payDebt',
+  },
+
 
   'GET /api/transaction': {
     controller: 'TransactionController',

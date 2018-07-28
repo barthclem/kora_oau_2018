@@ -13,10 +13,6 @@ module.exports = {
       type: 'String',
       required: true
     },
-    credit: {
-      model: 'Credit',
-      required: true
-    },
     amount: {
       type: 'number',
       required: true

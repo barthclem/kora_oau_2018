@@ -43,16 +43,18 @@ class TransactionService extends BaseService {
       }
       credit.status = 2; // 2 is the paid status
       await Transaction.create(transactionObj).fetch();
-      await Credit.update(credit.id, credit);
+      delete credit.id;
+      await Credit.update(creditId, credit);
       return {message: 'Debt paid succcessfully'};
     } catch (err) {
       throw err;
     }
   }
 
-  async grantCreditRequest (requestId, creditorId) {
+  async grantCreditRequest (transactionObj, creditDetails) {
     try {
-      const creditRequest = await creditRequest.findOne(requestId);
+      const {creditRequestId, creditorId} = creditDetails;
+      const creditRequest = await CreditRequest.findOne(creditRequestId);
       if(_.isEmpty(creditRequest)) {
         throw new Error ('Credit Request does not exist');
       }
@@ -61,7 +63,17 @@ class TransactionService extends BaseService {
         throw new Error ('You do not available credit to grant this request');
       }
       credit.status = 2;
-
+      const debit = {
+        user: creditRequest.user,
+        credit_request: creditRequest.id,
+        credit: credit.id,
+        duration: creditRequest.duration,
+        status: 1
+      };
+      const creditId = credit.id;
+      delete credit.id;
+      await Credit.update(creditId, credit);
+      await Debit.create(debit);
     } catch (err) {
       throw err;
     }

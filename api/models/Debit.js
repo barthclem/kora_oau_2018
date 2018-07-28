@@ -20,6 +20,10 @@ module.exports = {
       required: true
     },
 
+    transaction: {
+      model: 'Transaction'
+    },
+
     duration: {
       type: 'number',
       required: true
